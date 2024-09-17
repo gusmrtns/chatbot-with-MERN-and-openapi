@@ -68,7 +68,7 @@ Este é um projeto de **IA moderna** que utiliza a **OpenAI API** para criar um 
 
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/seu-usuario/chatbot-mern.git
+    git clone https://github.com/gusmrtns/chatbot-mern.git
     ```
 2. Instale as dependências do backend:
     ```bash
