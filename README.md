@@ -70,30 +70,44 @@ Este é um projeto de **IA moderna** que utiliza a **OpenAI API** para criar um 
     ```bash
     git clone https://github.com/gusmrtns/chatbot-with-MERN-and-openapi.git
     ```
+
 2. Instale as dependências do backend:
     ```bash
     cd backend
     npm install
     ```
+
 3. Instale as dependências do frontend:
     ```bash
     cd frontend
     npm install
     ```
-4. Configure as variáveis de ambiente conforme o `.env.example`.
+
+4. **Configure as variáveis de ambiente:**
+    - No diretório `backend`, existe um arquivo chamado `.env.example`. Ele contém placeholders para as variáveis de ambiente necessárias para rodar o projeto.
+    - Renomeie esse arquivo para `.env`:
+      ```bash
+      cp .env.example .env
+      ```
+    - Preencha os valores necessários, incluindo as suas chaves de API (como a chave da OpenAI) e outros secrets que o projeto possa exigir.
+
+    **Exemplo de um arquivo `.env`:**
+    ```env
+    OPENAI_API_KEY=your_openai_api_key_here
+    DB_PASSWORD=your_database_password_here
+    ```
+
 5. Rode o backend:
     ```bash
     npm run dev
     ```
+
 6. Rode o frontend:
     ```bash
     npm run dev
     ```
 
+
 ## 🤝 Contribuições
 
 Sinta-se à vontade para abrir issues e pull requests, sugerir melhorias e ajudar na evolução do projeto!
-
-## 📝 Licença
-
-Este projeto está sob a licença MIT.
