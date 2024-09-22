@@ -14,10 +14,7 @@ export const validate = (validations) => {
         res.status(422).json({ errors: errors.array() });
     };
 };
-export const singupValidator = [
-    body("name")
-        .notEmpty()
-        .withMessage("Name is required"),
+export const loginValidator = [
     body("email")
         .trim()
         .isEmail()
@@ -26,5 +23,11 @@ export const singupValidator = [
         .trim()
         .isLength({ min: 6 })
         .withMessage("Password should contains atleast 6 characters"),
+];
+export const singupValidator = [
+    body("name")
+        .notEmpty()
+        .withMessage("Name is required"),
+    ...loginValidator,
 ];
 //# sourceMappingURL=validator.js.map
