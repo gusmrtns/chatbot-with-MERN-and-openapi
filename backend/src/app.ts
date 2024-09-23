@@ -3,6 +3,9 @@ import { config } from "dotenv";
 import morgan from "morgan";
 import appRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
+import { swaggerDocs } from './utils/swaggerConfig.js'; // Importa a configuração do Swagger
+import swaggerUi from 'swagger-ui-express';
+
 config();
 
 const app = express();
@@ -10,6 +13,9 @@ const app = express();
 // middlewares
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
+
+// Rota para a documentação Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // remove it in production
 app.use(morgan("dev"));

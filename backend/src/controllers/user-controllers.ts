@@ -18,7 +18,7 @@ export const getAllUsers = async (
 }
 
 // user singup
-export const userSingup = async (
+export const userSignup = async (
     req: Request,
     res: Response,
     next: NextFunction) => {
