@@ -1,7 +1,27 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import { IoMdLogIn } from "react-icons/io";
 import React from "react";
+import CustomizedInput from "../components/shared/CustomizedInput";
+import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Login = () => {
+    const auth = useAuth();
+    const hundleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const email = formData.get("email") as string;
+        const password = formData.get("password") as string;
+        try {
+            toast.loading("Signing In", { id: "login" });
+            await auth?.login(email, password);
+            toast.success("Signed In Successfully", { id: "login" });
+        } catch (error) {
+            console.log(error);
+            toast.error("Signing In Failed", { id: "login" });
+
+        }
+    }
     return (
         <Box
             width={"100%"}
@@ -26,6 +46,7 @@ const Login = () => {
                 ml={"auto"}
                 mt={16}>
                 <form
+                    onSubmit={hundleSubmit}
                     style={{
                         margin: "auto",
                         padding: "30px",
@@ -47,7 +68,23 @@ const Login = () => {
                         >
                             Login
                         </Typography>
-
+                        <CustomizedInput type="email" name="email" label="Email" />
+                        <CustomizedInput type="password" name="password" label="Password" />
+                        <Button
+                            type="submit"
+                            sx={{
+                                px: 2,
+                                py: 1,
+                                mt: 2,
+                                width: "400px",
+                                borderRadius: 2,
+                                bgcolor: "#00fffc",
+                                ":hover": {
+                                    bgcolor: "snow",
+                                    color: "black"
+                                }
+                            }}
+                            endIcon={<IoMdLogIn />}> Login</Button>
                     </Box>
                 </form>
             </Box>

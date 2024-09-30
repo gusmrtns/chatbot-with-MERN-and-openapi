@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { loginUser } from "../helpers/api-communicator";
 
 // Define a 'User' type to represent the authenticated user's structure
 type User = {
@@ -33,8 +34,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     // 'login' function to handle user login, accepts email and password
     const login = async (email: string, password: string) => {
-        // TODO: Implement login logic (e.g., sending a request to the backend)
-        // Upon successful login, update `user` and `isLoggedIn` states.
+        const data = await loginUser(email, password);
+        if (data) {
+            setUser({ email: data.email, name: data.name });
+            setIsLoggedIn(true);
+        }
     };
 
     // 'signup' function to handle new user registration, accepts name, email, and password
