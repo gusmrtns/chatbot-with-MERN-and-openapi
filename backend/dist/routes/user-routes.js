@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { getAllUsers, userLogin, userSignup } from "../controllers/user-controllers.js";
+import { getAllUsers, userLogin, userSignup, verifyUser } from "../controllers/user-controllers.js";
 import { loginValidator, singupValidator, validate } from "../utils/validator.js";
+import { verifyToken } from "../utils/tokens-manager.js";
 const userRoutes = Router();
 /**
  * @swagger
@@ -89,5 +90,6 @@ userRoutes.post("/signup", validate(singupValidator), userSignup);
  *         description: Invalid credentials
  */
 userRoutes.post("/login", validate(loginValidator), userLogin);
+userRoutes.get("/auth-status", verifyToken, verifyUser);
 export default userRoutes;
 //# sourceMappingURL=user-routes.js.map

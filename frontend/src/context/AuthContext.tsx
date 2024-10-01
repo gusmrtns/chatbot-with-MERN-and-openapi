@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { loginUser } from "../helpers/api-communicator";
+import { authStatusChecker, loginUser } from "../helpers/api-communicator";
 
 // Define a 'User' type to represent the authenticated user's structure
 type User = {
@@ -28,8 +28,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     // 'useEffect' to check if the user is already authenticated (e.g., based on cookies or tokens) when the component mounts
     useEffect(() => {
-        // TODO: Implement logic to check if the user's cookies or token are valid 
+        // logic to check if the user's cookies or token are valid 
         // If valid, set the user as logged in and skip login.
+        async function checkStatus() {
+            const data = await authStatusChecker();
+            if (data) {
+                setUser({ email: data.email, name: data.name });
+                setIsLoggedIn(true);
+            }
+        }
+
+        checkStatus();
+
     }, []); // Empty dependency array means this runs only on the initial render
 
     // 'login' function to handle user login, accepts email and password
